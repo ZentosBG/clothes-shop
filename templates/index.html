@@ -5,53 +5,71 @@
 {% endblock title %}
 
 
-
 {% block main %}
     <main class="container-fluid p-0">
         <!-- Головний контент сторінки -->
-        <div id="carouselExampleIndicators" class="carousel slide">
-            <div class="carousel-indicators ">
-              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide1"></button>
-              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner slides position-relative z-0">
-                <div class="logikablog text-white text-center position-absolute top-50 start-50 translate-middle z-3">
-                    <h1>LogikaBlog</h1>
-                    <h2>Блог для учнів школи логіка</h2>
-                </div>
-              <div class="carousel-item active">
-                <img src="{{ url_for('static', filename='image/slide1.jpg')}}" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="{{ url_for('static', filename='image/slide2.jpg')}}" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="{{ url_for('static', filename='image/slide3.jpg')}}" class="d-block w-100" alt="...">
-              </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
 
+          <div class="row gx-4 gx-lg-5 align-items-center">
+              <div class="col-md-9 position-relative">
+                <div class="logikablog text-center position-absolute top-50 start-50 translate-middle z-3">
+                  <h1>Zentos</h1>
+                  <h2>Інтернет магазин одягу</h2>
+              </div>
+              <img class="card-img-top mb-5 mb-md-0" src="{{ url_for('static', filename='image/slide1.jpg' ) }}" alt="..." /></div>
+              <div class="col-md-3">
+              <h3 class = "text-center">Остані товари</h3>
+
+              <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="{{ url_for('static', filename='image/' + items[-1][4]) }}" class="d-block w-100" alt="...">
+                    <div class="carousel-caption text-dark d-none d-md-block">
+                    <h5>{{items[-1][2]}}</h5>
+                    <h4>{{items[-1][5]}} грн</h4>
+                    <a href="{{url_for('item', item_id = items[-1][0])}}" class="card-link stretched-link"></a>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='image/' + items[-2][4]) }}" class="d-block w-100" alt="...">
+                    <div class="carousel-caption text-dark d-none d-md-block">
+                      <h5>{{items[-2][2]}}</h5>
+                      <h4>{{items[-2][5]}} грн</h4>
+                      <a href="{{url_for('item', item_id = items[-2][0])}}" class="card-link stretched-link"></a>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='image/' + items[-3][4]) }}" class="d-block w-100" alt="...">
+                    <div class="carousel-caption text-dark d-none d-md-block">
+                      <h5>{{items[-3][2]}}</h5>
+                      <h4>{{items[-3][5]}} грн</h4>
+                    <a href="{{url_for('item', item_id = items[-3][0])}}" class="card-link stretched-link"></a>
+                    </div>
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+
+              </div>
+              </div>
 
           <div class="posts container py-5">
             <div class="card-group">
 
-              {% for post in posts %}
-                <div class="card m-2" style="min-width : 18rem">
-                <img src="{{ url_for('static', filename='image/' + post[5]) }}" class="card-img-top" alt="...">
+              {% for item in items %}
+                <div class="card m-2" style="min-width : 18rem ; max-width : 20rem">
+                <img src="{{ url_for('static', filename='image/' + item[4]) }}" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">{{post[3]}}</h5>
-                  <h6 class="card-subtitle mb-2 text-body-secondary">Автор статті</h6>
-                  <p class="card-text">{{post[4]}}</p>
-                  <a href="{{url_for('post', post_id = post[0])}}" class="card-link stretched-link"></a>
+                  <h5 class="card-title">{{item[2]}}</h5>
+                  <h6 class="card-subtitle mb-2 text-body-secondary"></h6>
+                  <h4 class="card-text">{{item[5]}} грн</h4>
+                  <a href="{{url_for('item', item_id = item[0])}}" class="card-link stretched-link"></a>
                 </div>
             </div>
               {% endfor %}

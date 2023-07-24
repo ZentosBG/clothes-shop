@@ -29,22 +29,22 @@ def add_user(*data):
 # add_category("skretsh")
 # add_user("Roma", "uscdjjdcuc@eeed", "17745")
 
-def get_post(post_id):
+def get_item(item_id):
     open()
-    cursor.execute('''SELECT * from posts WHERE id == (?)''', [post_id])
-    post = cursor.fetchone()
+    cursor.execute('''SELECT * from ofers WHERE id == (?)''', [item_id])
+    item = cursor.fetchone()
     conn.commit()
     close()
-    return post
+    return item
 
-def get_posts():
+def get_ofers():
     open()
     cursor.execute('''
-    SELECT * from posts''')
-    posts = cursor.fetchall()
+    SELECT * from ofers''')
+    ofers = cursor.fetchall()
     conn.commit()
     close()
-    return posts
+    return ofers
 
 def get_category_name(id):
     open()
@@ -54,13 +54,13 @@ def get_category_name(id):
     close()
     return category
 
-def get_category_post(id):
+def get_category_items(id):
     open()
-    cursor.execute('''SELECT * from posts WHERE category_id == (?)''', [id])
-    post = cursor.fetchall()
+    cursor.execute('''SELECT * from ofers WHERE category_id == (?)''', [id])
+    items = cursor.fetchall()
     conn.commit()
     close()
-    return post
+    return items
 
 def get_categorys():
     open()
@@ -70,10 +70,10 @@ def get_categorys():
     close()
     return data
 
-def add_post(*data):
+def add_order(*data):
     open()
     cursor.execute('''
-    INSERT INTO posts (category_id, title, text, image) VALUES ((?), (?), (?), (?))''', 
-    [data[0],data[1],data[2],data[3]])
+    INSERT INTO orders (ofers_id, name, phone, email, city, address, amount) VALUES ((?), (?), (?), (?), (?), (?), (?))''', 
+    [data[0],data[1],data[2],data[3],data[4],data[5],data[6]])
     conn.commit()
     close()
